@@ -1,9 +1,52 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
     <!-- brandlink -->
-    <a class="navbar-brand" href="#"> FaceMate</a>
+    <a class="navbar-brand" routerLink="/"> FaceMate</a>
+
+    <!-- links -->
+    <div class="bs-component">
+      <ul class="navbar-nav navbar-brand mr-auto nav nav-tabs">
+        <ng-container *ngIf="accountservice.CurrentUser$ | async">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="tab"
+              routerLink="/members"
+              routerLinkActive="active"
+            >
+              Matches</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="tab"
+              routerLink="/lists"
+              routerLinkActive="active"
+            >
+              Lists</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/messages"
+              routerLinkActive="active"
+              data-bs-toggle="tab"
+            >
+              Messages</a
+            >
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+    <!-- linksEnd -->
     <!-- dropdown -->
-    <div class="btn-group" dropdown *ngIf="accountservice.CurrentUser$ | async">
+    <div
+      class="btn-group"
+      dropdown
+      *ngIf="accountservice.CurrentUser$ | async as User"
+    >
       <a
         id="button-animated"
         dropdownToggle
@@ -11,7 +54,7 @@
         class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle btn-group-toggle"
         aria-controls="dropdown-animated"
       >
-        Welcome User <span class="caret"></span>
+        Welcome {{ User.userName | titlecase }} <span class="caret"></span>
       </a>
       <ul
         id="dropdown-animated"
@@ -53,6 +96,7 @@
         placeholder="User Name"
         class="mx-1 p-2"
       />
+
       <input
         name="password"
         [(ngModel)]="model.password"

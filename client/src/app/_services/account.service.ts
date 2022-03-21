@@ -12,6 +12,7 @@ import { User } from '../_models/user';
 export class AccountService {
 baseUrl="https://localhost:5001/api/";
 //buffersubject emit last value ==>1
+// any can subscribe and see if any thing changed
 private CurrentUserSource=new ReplaySubject<User>(1);
 CurrentUser$=this.CurrentUserSource.asObservable()
 
@@ -22,6 +23,7 @@ CurrentUser$=this.CurrentUserSource.asObservable()
         map((response:User)=>{
           const user=response;
           if(user){
+            
             localStorage.setItem('user',JSON.stringify(user))
             this.CurrentUserSource.next(user)
           }
@@ -34,13 +36,16 @@ CurrentUser$=this.CurrentUserSource.asObservable()
     return this.http.post(this.baseUrl+'account/register',model).pipe(
       map((user:User)=>{
         if(user){
+          //add to the local storage
           localStorage.setItem('user',JSON.stringify(user))
+          //add to observable to get it in the component
           this.CurrentUserSource.next(user)
         }
       })
     )
   }
-  setcurrentuser(user:User){
+
+setcurrentuser(user:User){
     this.CurrentUserSource.next(user);
   }
   logout(){
