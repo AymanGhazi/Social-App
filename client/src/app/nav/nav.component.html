@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <!-- brandlink -->
+    <a class="navbar-brand" href="#"> FaceMate</a>
+    <!-- dropdown -->
+    <div class="btn-group" dropdown *ngIf="accountservice.CurrentUser$ | async">
+      <a
+        id="button-animated"
+        dropdownToggle
+        type="button"
+        class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle btn-group-toggle"
+        aria-controls="dropdown-animated"
+      >
+        Welcome User <span class="caret"></span>
+      </a>
+      <ul
+        id="dropdown-animated"
+        *dropdownMenu
+        class="dropdown-menu mt-2"
+        role="menu"
+        aria-labelledby="button-animated"
+      >
+        <li role="menuitem">
+          <a class="dropdown-item">Edit profile</a>
+        </li>
+        <div class="dropdown-divider"></div>
+
+        <li role="menuitem">
+          <a class="dropdown-item">Something else here</a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li role="menuitem">
+          <a class="dropdown-item" (click)="logout()">Log Out</a>
+        </li>
+      </ul>
+    </div>
+    <!-- dropdownended -->
+
+    <!-- loginform -->
+
+    <form
+      *ngIf="(accountservice.CurrentUser$ | async) === null"
+      #loginform="ngForm"
+      (ngSubmit)="login()"
+      class="d-flex mt-2 mt-md-0 justify-content-end"
+      autocomplete="off"
+    >
+      <input
+        name="username"
+        [(ngModel)]="model.username"
+        class="form-control me-sm-2"
+        type="text"
+        placeholder="User Name"
+        class="mx-1 p-2"
+      />
+      <input
+        name="password"
+        [(ngModel)]="model.password"
+        class="form-control me-sm-2"
+        type="password"
+        placeholder="password"
+        class="mx-1 p-2"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Login
+      </button>
+    </form>
+
+    <!-- loginform ended -->
+  </div>
+</nav>
