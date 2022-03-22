@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container">
   <div *ngIf="!registerMode" style="text-align: center">
     <h1>Find Your match</h1>
     <p class="lead">Come on and see your matches ... all you is to sign up !</p>
@@ -9,13 +9,11 @@
       <button class="btn btn-info btn-lg">Learn More</button>
     </div>
   </div>
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <app-register
-          (CancelRegister)="cancelRegisterMode($event)"
-        ></app-register>
-      </div>
+  <ng-container *ngIf="registerMode">
+    <div class="col-12 justify-content-center">
+      <app-register
+        (CancelRegister)="cancelRegisterMode($event)"
+      ></app-register>
     </div>
-  </div>
+  </ng-container>
 </div>
