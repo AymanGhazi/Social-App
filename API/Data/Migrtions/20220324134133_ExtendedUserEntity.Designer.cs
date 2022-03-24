@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrtions
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220324134133_ExtendedUserEntity")]
+    partial class ExtendedUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,9 +24,6 @@ namespace API.Data.Migrtions
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Country")
                         .HasColumnType("TEXT");
 
@@ -35,9 +34,6 @@ namespace API.Data.Migrtions
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Interests")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Introduction")
@@ -52,14 +48,14 @@ namespace API.Data.Migrtions
                     b.Property<string>("LookingFor")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
                     b.Property<byte[]>("passwordHash")
                         .HasColumnType("BLOB");
 
                     b.Property<byte[]>("passwordSalt")
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("userName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

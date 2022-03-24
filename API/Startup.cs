@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Errors;
 using API.extensions;
+using API.Helpers;
 using API.interfaces;
 using API.MiddelWare;
 using API.services;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,15 +41,12 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
             //extension method
             services.ApplicationServices(_config);
             services.AddControllers();
             services.AddCors();
             //extension method
             services.AddIdentityServices(_config);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Social_App", Version = "v1" });
