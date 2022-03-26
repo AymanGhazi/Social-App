@@ -11,7 +11,7 @@ import{BsDropdownModule}from"ngx-bootstrap/dropdown";
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListsComponent } from './members/member-lists/member-lists.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -20,6 +20,11 @@ import { TestErrorsComponent } from './Errors/test-errors/test-errors.component'
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './Errors/not-found/not-found.component';
 import { ServerErrorComponent } from './Errors/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { MemberDetailsComponent } from './members/member-details/member-details.component';
+import { RouterModule, Routes } from '@angular/router';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -29,24 +34,27 @@ import { ServerErrorComponent } from './Errors/server-error/server-error.compone
     HomeComponent,
     RegisterComponent,
    MemberListsComponent,
-   MemberDetailComponent,
    ListsComponent,
    MessagesComponent,
    TestErrorsComponent,
    NotFoundComponent,
-  ServerErrorComponent
-   
+  ServerErrorComponent,
+  MemberCardComponent,
+  MemberDetailsComponent
   ],
   imports: [
-  BrowserModule,
+BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    MatTabsModule
+    
   ],
-  providers: [{
-    provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true}
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })

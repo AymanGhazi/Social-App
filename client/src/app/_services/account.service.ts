@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, ReplaySubject } from 'rxjs';
 import { User } from '../_models/user';
+import { environment } from './../../environments/environment';
 
 
 
@@ -10,7 +11,7 @@ import { User } from '../_models/user';
   providedIn: 'root'
 })
 export class AccountService {
-baseUrl="https://localhost:5001/api/";
+baseUrl=environment.apiUrl;
 //buffersubject emit last value ==>1
 // any can subscribe and see if any thing changed
 private CurrentUserSource=new ReplaySubject<User>(1);

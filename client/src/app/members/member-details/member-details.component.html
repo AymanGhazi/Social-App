@@ -1,0 +1,120 @@
+<!-- <mat-tab-group>
+  <mat-tab label="First"> Content 1 </mat-tab>
+  <mat-tab label="Second"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group> -->
+<div class="container emp-profile">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="profile-img" *ngIf="member">
+        <img [src]="member.photoUrl" alt="{{ member.knownAs }}" />
+      </div>
+      <div class="">
+        <button type="submit" class="btn btn-outline-info ml-3">Like</button>
+        <button type="submit" class="btn btn-outline-success m-3">
+          Message
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-9" *ngIf="member">
+      <div class="profile-head">
+        <h5>{{ member.username }}</h5>
+        <h6>Web Developer and Designer</h6>
+        <p class="profile-rating age">
+          AGE : <span>{{ member.age }}</span>
+        </p>
+        <tabset class="member-tabset">
+          <!-- About -->
+          <tab heading="About">
+            <!-- homesection -->
+            <div
+              id="home"
+              class="tab-pane fade show active"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Name</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ member.username }}</p>
+                </div>
+                <div class="col-md-6">
+                  <label>Gender</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ member.gender }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>last Active</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ member.lastActive }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>created</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ member.created }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>city</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ member.city }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Country</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ member.country }}</p>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <!-- Description -->
+          <tab heading="Description">
+            <div>
+              <div class="row">
+                <div>
+                  <p>{{ member.introduction }}</p>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <!-- lookingFor -->
+          <tab heading="Looking For">
+            <div id="profile" class="tab-pane">
+              <div class="row">
+                <div>
+                  <p>{{ member.lookingFor }}</p>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <tab heading="Photos">
+            <ngx-gallery
+              style="display: inline-block; margin-bottom: 20px"
+              [options]="galleryOptions"
+              [images]="galleryImages"
+              class="ngx-gallery"
+            ></ngx-gallery>
+          </tab>
+          <tab heading="Messages">
+            <p>Messages Will be here</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
