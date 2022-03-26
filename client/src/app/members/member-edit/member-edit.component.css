@@ -1,9 +1,13 @@
+body {
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+
 .emp-profile {
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #bebebc;
+    background: #fff;
 }
 
 .profile-img {
@@ -31,15 +35,26 @@
     opacity: 0;
     right: 0;
     top: 0;
-} 
+}
 
 .profile-head h5 {
     color: #333;
 }
 
-.profile-head h6, .age {
+.profile-head h6 {
     color: #0062cc;
 }
+
+form {
+    display: flex;
+    flex-flow: column;
+    height: auto;
+   
+
+}
+
+input {-webkit-appearance: none; box-shadow: none !important; }
+:-webkit-autofill { color: #fff !important; }
 
 .profile-edit-btn {
     border: none;

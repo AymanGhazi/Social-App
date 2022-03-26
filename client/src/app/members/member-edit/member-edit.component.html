@@ -1,0 +1,168 @@
+<div class="container emp-profile">
+  <div class="row">
+    <div class="col-md-3 d-flex flex-column">
+      <div class="profile-img" *ngIf="member">
+        <img [src]="member.photoUrl" alt="{{ member.knownAs }}" />
+        <div class="file btn btn-lg btn-primary" *ngIf="edit">
+          Change Photo
+          <input type="file" name="file" />
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-success mt-2"
+            (click)="edit = true"
+            (click)="toastr.info('Any unsaved changes will be lost')"
+          >
+            edit profile
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7 mt-4" *ngIf="member">
+      <form #editform="ngForm" id="updateForm" (ngSubmit)="updatemember()">
+        <div class="profile-head">
+          <h5>{{ member.username }}</h5>
+          <h6>Web Developer and Designer</h6>
+          <p class="profile-rating age">
+            AGE : <span>{{ member.age }}</span>
+          </p>
+
+          <tabset class="member-tabset">
+            <!-- About -->
+            <tab heading="About">
+              <!-- homesection -->
+              <div
+                id="home"
+                class="tab-pane fade show active"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{ member.username }}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Gender</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p *ngIf="!edit">{{ member.gender }}</p>
+                    <input
+                      [(ngModel)]="member.gender"
+                      type="text"
+                      name="gender"
+                      *ngIf="edit"
+                      value="{{ member.gender }}"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>city</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p *ngIf="!edit">{{ member.city }}</p>
+                    <input
+                      [(ngModel)]="member.city"
+                      type="text"
+                      name="city"
+                      *ngIf="edit"
+                      value="{{ member.city }}"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Country</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p *ngIf="!edit">{{ member.country }}</p>
+                    <input
+                      [(ngModel)]="member.country"
+                      type="text"
+                      name="country"
+                      *ngIf="edit"
+                      value="{{ member.country }}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <!-- Description -->
+            <tab heading="Description">
+              <div>
+                <div class="row">
+                  <div>
+                    <p *ngIf="!edit">{{ member.introduction }}</p>
+                    <textarea
+                      [(ngModel)]="member.introduction"
+                      *ngIf="edit"
+                      name="introduction"
+                      cols="80"
+                      placeholder="{{ member.introduction }}"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <!-- lookingFor -->
+            <tab heading="Looking For">
+              <div id="profile" class="tab-pane">
+                <div class="row">
+                  <div>
+                    <p *ngIf="!edit">{{ member.lookingFor }}</p>
+                    <textarea
+                      [(ngModel)]="member.introduction"
+                      *ngIf="edit"
+                      cols="80"
+                      name="introduction"
+                      rows="6"
+                      placeholder="{{ member.lookingFor }}"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="interests">
+              <div id="profile" class="tab-pane">
+                <div class="row">
+                  <div>
+                    <p *ngIf="!edit">{{ member.interests }}</p>
+                    <textarea
+                      [(ngModel)]="member.interests"
+                      *ngIf="edit"
+                      cols="80"
+                      name="interests"
+                      rows="6"
+                      placeholder="{{ member.interests }}"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Photos">
+              <ngx-gallery
+                style="display: inline-block; margin-bottom: 20px"
+                class="ngx-gallery"
+              ></ngx-gallery>
+            </tab>
+          </tabset>
+        </div>
+        <button
+          [disabled]="!editform.dirty"
+          form="updateForm"
+          type="submit"
+          class="btn btn-outline-success col-12"
+        >
+          Save changes
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
