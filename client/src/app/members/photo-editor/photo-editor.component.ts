@@ -59,8 +59,13 @@ user:User
 //add the photo after the response to user.photos array
     this.uploader.onSuccessItem=(item,response,status,header)=>{
       if(response){
-      const photo=JSON.parse(response)
+      const photo:Photo=JSON.parse(response)
       this.member.photos.push(photo)
+      if(photo.isMain){
+        this.user.photoUrl=photo.url;
+        this.member.photoUrl=photo.url;
+        this.accountService.setcurrentuser(this.user);
+      }
       }
     }
 

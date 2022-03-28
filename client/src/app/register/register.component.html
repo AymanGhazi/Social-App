@@ -2,34 +2,86 @@
   <div class="modal-header justify-content-center">
     <h5 class="modal-title font-weight-bold">Sign up</h5>
   </div>
+  <!-- (ngSubmit)="registerForm.valid && Register()" to make sure user doesn`t click enter -->
   <form
-    #registerForm="ngForm"
-    (ngSubmit)="Register()"
+    [formGroup]="registerForm"
+    (ngSubmit)="registerForm.valid && Register()"
     autocomplete="off"
-    class="row"
+    class="row w-80 p-3"
   >
     <div class="modal-body">
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control m-2"
-          name="username"
-          [(ngModel)]="model.userName"
-          placeholder="User Name"
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="password"
-          class="form-control m-2"
-          name="password"
-          [(ngModel)]="model.password"
-          placeholder="password"
-        />
-      </div>
+      <app-text-input
+        [formControl]="control['username']"
+        [label]="'username'"
+      ></app-text-input>
 
+      <app-text-input
+        [formControl]="control['knownas']"
+        [label]="'known as'"
+      ></app-text-input>
+      <!-- dd -->
+      <app-date-input
+        [formControl]="control['dateofbirth']"
+        [label]="'date of birth'"
+        [maxDate]="maxDate"
+      ></app-date-input>
+      <!-- sk -->
+      <app-text-input
+        [formControl]="control['city']"
+        [label]="'city'"
+      ></app-text-input>
+
+      <app-text-input
+        [formControl]="control['country']"
+        [label]="'country'"
+      ></app-text-input>
+
+      <app-text-input
+        [formControl]="control['password']"
+        [label]="'password'"
+      ></app-text-input>
+      <app-text-input
+        [formControl]="control['confirmpassword']"
+        [label]="'confirm password'"
+      ></app-text-input>
+      <div class="" style="height: 65px">
+        <label class="control-label m-4">I am a :</label>
+        <div class="form-check form-check-inline mw-20">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="gender"
+            name="gender"
+            id="inlineRadio1"
+            value="male"
+          />
+          <label class="form-check-label" for="inlineRadio1">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="gender"
+            name="gender"
+            id="inlineRadio2"
+            value="female"
+          />
+          <label class="form-check-label" for="inlineRadio2">Female</label>
+        </div>
+      </div>
+      <div class="row" *ngIf="validationsErrors.length > 0">
+        <ul class="text-danger">
+          <li *ngFor="let error of validationsErrors">{{ error }}</li>
+        </ul>
+      </div>
       <div class="modal-footer justify-content-center">
-        <button class="btn btn-success" type="submit">Register</button>
+        <button
+          class="btn btn-success"
+          [disabled]="!registerForm.valid"
+          type="submit"
+        >
+          Register
+        </button>
 
         <button
           type="button"
@@ -43,6 +95,7 @@
     </div>
   </form>
 </div>
+
 <!-- 
 <form
   #registerForm="ngForm"

@@ -20,12 +20,17 @@ show:Boolean=false
 
   ngOnInit(): void {
     this.galleryOptions=[{
-      width:"500px",
-      height:"500px",
+      width:"350px",
+      height:"350px",
       imagePercent:100,
       thumbnailsColumns:4,
-      imageAnimation:NgxGalleryAnimation.Slide,
-      preview:false
+      arrowPrevIcon :"fa fa-angle-double-left",
+      arrowNextIcon :"fa fa-angle-double-right",
+      imageAnimation:NgxGalleryAnimation.Fade,
+      imageAutoPlay :true,
+      imageAutoPlayInterval :3000,
+      imageAutoPlayPauseOnHover :true,
+      preview:false   
     }]
        this.loadmember() 
   }

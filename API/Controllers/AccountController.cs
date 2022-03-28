@@ -7,6 +7,7 @@ using API.Data;
 using API.DTos;
 using API.Entities;
 using API.interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +19,11 @@ namespace API.Controllers
 
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             _tokenService = tokenService;
             _context = context;
 
@@ -30,7 +33,7 @@ namespace API.Controllers
         public async Task<ActionResult<userDto>> Register(RegisterDTo regitsreDto)
         {
             if (await userExist(regitsreDto.username)) return BadRequest("username is taken");
-
+            var user = _mapper.Map<AppUser>(regitsreDto);
             //Disposing the hmac with using so we dispose it after it finishes
             //username must be string to be hashed so we have to make DTAs , object that holds the same types from the front end
             //and  assign it to  the main class AppUser
@@ -38,12 +41,10 @@ namespace API.Controllers
 
             using var hmac = new HMACSHA512(); //hashing the password
 
-            var user = new AppUser
-            {
-                UserName = regitsreDto.username.ToLower(),
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(regitsreDto.password)),
-                passwordSalt = hmac.Key
-            };
+
+            user.UserName = regitsreDto.username.ToLower();
+            user.passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(regitsreDto.password));
+            user.passwordSalt = hmac.Key;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -51,8 +52,7 @@ namespace API.Controllers
             {
                 userName = user.UserName,
                 token = _tokenService.CreateToken(user),
-
-
+                knownas = user.KnownAs
             };
 
         }

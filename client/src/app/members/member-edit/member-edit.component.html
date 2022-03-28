@@ -2,7 +2,7 @@
   <div class="row justify-content-md-center">
     <div class="col-md-7">
       <div class="text-lg-center pt-lg-5">
-        <h1>{{ member.username  }}</h1>
+        <h1>{{ member.username }}</h1>
         <h4>Web Developer and Designer</h4>
         <p class="profile-rating age">
           AGE : <span>{{ member.age }}</span>
@@ -13,7 +13,7 @@
       <div class="profile-img justify-content-center">
         <img
           class="memberphoto"
-          src="{{ member.photoUrl || '../user.png' }}"
+          src="{{ member.photoUrl || './assets/user.png' }}"
           alt="{{ member.knownAs }}"
         />
         <div class="file btn btn-lg btn-primary" *ngIf="edit">

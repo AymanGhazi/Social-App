@@ -1,0 +1,20 @@
+<div class="form-group">
+  <input
+    [class.is-invalid]="ngcontrol.touched && ngcontrol.invalid"
+    type="{{ type }}"
+    class="form-control m-2"
+    [formControl]="control"
+    placeholder="{{ label }}"
+  />
+  <div *ngIf="control.errors?.['required']" class="invalid-feedback">
+    Please enter a {{ label }}
+  </div>
+  <div *ngIf="control.errors?.['minlength']" class="invalid-feedback">
+    {{ label }} must be at least
+    {{control.errors?.['minlength']?.requiredLength}}
+  </div>
+  <div *ngIf="control.errors?.['isMatching']" class="invalid-feedback">
+    passwords are not match
+  </div>
+  <!-- validations must be lower cases -->
+</div>
