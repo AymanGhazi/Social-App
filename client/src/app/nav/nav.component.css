@@ -9,3 +9,10 @@
   border-color: #333;
 }
 
+img {
+  max-height: 50px;
+  height: auto;
+  border-radius: 50%;
+  
+  display: inline;
+}

@@ -1,8 +1,21 @@
 <div class="container emp-profile">
-  <div class="row">
-    <div class="col-md-3 d-flex flex-column">
-      <div class="profile-img" *ngIf="member">
-        <img [src]="member.photoUrl" alt="{{ member.knownAs }}" />
+  <div class="row justify-content-md-center">
+    <div class="col-md-7">
+      <div class="text-lg-center pt-lg-5">
+        <h1>{{ member.username  }}</h1>
+        <h4>Web Developer and Designer</h4>
+        <p class="profile-rating age">
+          AGE : <span>{{ member.age }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex flex-column">
+      <div class="profile-img justify-content-center">
+        <img
+          class="memberphoto"
+          src="{{ member.photoUrl || '../user.png' }}"
+          alt="{{ member.knownAs }}"
+        />
         <div class="file btn btn-lg btn-primary" *ngIf="edit">
           Change Photo
           <input type="file" name="file" />
@@ -19,16 +32,11 @@
         </div>
       </div>
     </div>
-
-    <div class="col-md-7 mt-4" *ngIf="member">
+  </div>
+  <div class="row mt-5">
+    <div class="mt-4" *ngIf="member">
       <form #editform="ngForm" id="updateForm" (ngSubmit)="updatemember()">
         <div class="profile-head">
-          <h5>{{ member.username }}</h5>
-          <h6>Web Developer and Designer</h6>
-          <p class="profile-rating age">
-            AGE : <span>{{ member.age }}</span>
-          </p>
-
           <tabset class="member-tabset">
             <!-- About -->
             <tab heading="About">
@@ -147,10 +155,7 @@
               </div>
             </tab>
             <tab heading="Photos">
-              <ngx-gallery
-                style="display: inline-block; margin-bottom: 20px"
-                class="ngx-gallery"
-              ></ngx-gallery>
+              <app-photo-editor [member]="member"></app-photo-editor>
             </tab>
           </tabset>
         </div>

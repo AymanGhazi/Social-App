@@ -63,6 +63,11 @@
         class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle btn-group-toggle"
         aria-controls="dropdown-animated"
       >
+        <img
+          class="m-0"
+          src="{{ User.photoUrl || '../user.png' }}"
+          alt="{{ User.userName }}"
+        />
         Welcome {{ User.userName | titlecase }} <span class="caret"></span>
       </a>
       <ul

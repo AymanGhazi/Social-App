@@ -17,8 +17,8 @@ show:Boolean=false
 
  galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     this.galleryOptions=[{
       width:"500px",
       height:"500px",

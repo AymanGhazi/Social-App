@@ -36,8 +36,8 @@ edit:boolean=false
                }
 
   ngOnInit(): void {
-    this.loadmember()
 
+    this.loadmember()     
   }
       loadmember(){
         this.memberservice.getMember(this.user.userName).subscribe(
@@ -49,7 +49,7 @@ edit:boolean=false
       updatemember(){
        this.memberservice.updateMember(this.member).subscribe(()=>{
         this.toastr.success("form Updated")
-       this.edit=false
+       this.edit=false  
        this.editform.reset(this.member);
        })
       
