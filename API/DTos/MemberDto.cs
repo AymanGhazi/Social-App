@@ -7,7 +7,7 @@ namespace API.DTos
     public class MemberDto
     {
         public int id { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
         public string photoUrl { get; set; }
 
         public int Age { get; set; }

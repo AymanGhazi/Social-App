@@ -68,7 +68,7 @@
           src="{{ User.photoUrl || './assets/user.png' }}"
           alt="{{ User.userName }}"
         />
-        Welcome {{ User.userName | titlecase }} <span class="caret"></span>
+        Welcome {{ User.knownas | titlecase }} <span class="caret"></span>
       </a>
       <ul
         id="dropdown-animated"

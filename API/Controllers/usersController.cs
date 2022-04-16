@@ -6,6 +6,7 @@ using API.Data;
 using API.DTos;
 using API.Entities;
 using API.extensions;
+using API.Helpers;
 using API.interfaces;
 using API.services;
 using AutoMapper;
@@ -32,20 +33,30 @@ namespace API.Controllers
             _UserRepository = UserRepository;
 
 
+
         }
 
         //add endPoints
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers() //get list of users
+        public async Task<ActionResult<pageList<MemberDto>>> GetUsers([FromQuery] UserParams userParams) //get list of users
         {
-            var users = await _UserRepository.GetMembersAsync();
+            var user = await _UserRepository.GetUserbyUserNameAsync(User.GetuserName());
 
+            userParams.currentUserName = user.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+            }
+
+            var users = await _UserRepository.GetMembersAsync(userParams);
+            //if null update the gender params
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
             // var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
-
             return Ok(users);
         }
-
 
 
         //api/users/3
@@ -125,7 +136,7 @@ namespace API.Controllers
             if (photo == null) return NotFound();
 
             if (photo.IsMain) { return BadRequest("You can not Delete your main Photo"); }
-            
+
             if (photo.PublicId != null)
             {
                 var result = await _photoService.DeletePhotoAsync(photo.PublicId);

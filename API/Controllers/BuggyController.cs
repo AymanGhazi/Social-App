@@ -41,7 +41,7 @@ namespace API.Controllers
         public ActionResult<string> badRequest()
         {
 
-            return BadRequest("bad request");
+            return BadRequest();
         }
 
 

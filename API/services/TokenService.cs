@@ -27,7 +27,9 @@ namespace API.services
             var Creds = new SigningCredentials(_Key, SecurityAlgorithms.HmacSha512Signature);
             //claims
             var Claims = new List<Claim>{
-               new Claim(JwtRegisteredClaimNames.NameId,user.UserName)
+             new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString()),
+             new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName)
+
            };
 
             //token itself Descriptor ==> Subject claims , expires, signing           credentails

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MembersService } from './../../_services/members.service';
 import { Member } from 'src/app/_models/Member';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { TimeagoIntl } from 'ngx-timeago';
 
 @Component({
   selector: 'app-member-details',
@@ -13,7 +14,10 @@ export class MemberDetailsComponent implements OnInit {
 member:Member
 
 show:Boolean=false
-  constructor(private memberservice:MembersService,private route:ActivatedRoute) { }
+  constructor(private memberservice:MembersService,private route:ActivatedRoute) { 
+       
+    
+  }
 
  galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];

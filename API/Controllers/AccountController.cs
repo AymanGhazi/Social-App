@@ -52,11 +52,10 @@ namespace API.Controllers
             {
                 userName = user.UserName,
                 token = _tokenService.CreateToken(user),
-                knownas = user.KnownAs
+                knownas = user.KnownAs,
+                Gender = user.Gender
             };
-
         }
-
         //login
         [HttpPost("login")]
         public async Task<ActionResult<userDto>> login(loginDto loginDto)
@@ -80,7 +79,9 @@ namespace API.Controllers
             {
                 userName = user.UserName,
                 token = _tokenService.CreateToken(user),
-                photoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                photoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                knownas = user.KnownAs,
+                Gender = user.Gender
             };
         }
 

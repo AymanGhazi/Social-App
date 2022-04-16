@@ -1,4 +1,6 @@
 using API.Data;
+using API.Date;
+using API.DTos;
 using API.Helpers;
 using API.interfaces;
 using API.services;
@@ -13,9 +15,10 @@ namespace API.extensions
     {
         public static IServiceCollection ApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-
+            //to update last Active filter
+            services.AddScoped<LogUserActivity>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
-
+            services.AddScoped<ILIkeRepository, LikesRepository>();
             services.AddScoped<IuserRepository, UserRepository>();
 
             services.AddScoped<IPhotoService, PhotoService>();

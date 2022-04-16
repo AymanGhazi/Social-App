@@ -1,0 +1,11 @@
+.form-group{
+    display:inline-block;
+}
+form{
+    display: inline-block;
+}
+.isclicked{
+    color: #333;
+  background-color: #28a745;
+  border-color: #333;
+}

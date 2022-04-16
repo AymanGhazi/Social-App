@@ -108,3 +108,11 @@
     font-weight: 600;
     color: #0062cc;
 }
+img {
+  max-height: 250px;
+  max-width: 250px;
+  height: auto;
+  border-radius: 50%;
+  
+  display: inline;
+}

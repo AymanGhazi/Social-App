@@ -7,17 +7,22 @@ import{NgxGalleryModule}from"@kolkov/ngx-gallery"
 import { FileUploadModule } from 'ng2-file-upload';
 import {MatRadioModule} from '@angular/material/radio';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
   imports: [
-   CommonModule,
+ CommonModule,
      BsDropdownModule.forRoot(),
     ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
     NgxGalleryModule,
     FileUploadModule,
- BsDatepickerModule.forRoot(),
-    
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   exports:[
     BsDropdownModule,
@@ -27,6 +32,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
      FileUploadModule,
      MatRadioModule,
      BsDatepickerModule,
+     PaginationModule,
+     ButtonsModule,
+     TimeagoModule
+     
+  
   ]
 })
 export class SharedModule { }

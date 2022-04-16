@@ -25,6 +25,7 @@ CurrentUser$=this.CurrentUserSource.asObservable()
           const user=response;
           if(user){
             this.setcurrentuser(user)
+          
           }
         })
       )
@@ -36,6 +37,7 @@ CurrentUser$=this.CurrentUserSource.asObservable()
       map((user:User)=>{
         if(user){
             this.setcurrentuser(user)
+           
         }
       })
     )

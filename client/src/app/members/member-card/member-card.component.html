@@ -7,21 +7,23 @@
       />
     </div>
     <div class="team-content">
-      <h3 class="name">{{ member.username }}</h3>
+      <h3 class="name">{{ member.userName }}</h3>
       <h4 class="title">Age : {{ member.age }}</h4>
     </div>
     <ul class="social">
       <li>
         <a
           href="#"
-          routerLink="/members/{{ member.username }}"
+          routerLink="/members/{{ member.userName }}"
           aria-hidden="true"
         >
           <i class="fa fa-user"></i>
         </a>
       </li>
       <li>
-        <a href="#" aria-hidden="true"> <i class="fa fa-heart"></i></a>
+        <a (click)="addLike(member)" aria-hidden="true">
+          <i class="fa fa-heart"></i
+        ></a>
       </li>
       <li>
         <a href="#" aria-hidden="true"> <i class="fa fa-envelope"></i></a>
