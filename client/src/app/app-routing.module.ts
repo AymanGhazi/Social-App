@@ -11,6 +11,8 @@ import { TestErrorsComponent } from './Errors/test-errors/test-errors.component'
 import { ServerErrorComponent } from './Errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { memberDetailedResolver } from './_Resolvers/member_detailed_resolver';
+
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -20,7 +22,10 @@ const routes: Routes = [
     canActivate:[AuthGuard],
     children:[
   {path:'members',component:MemberListsComponent},
-  {path:'members/:username',component:MemberDetailsComponent,},
+
+  {path:'members/:username',component:MemberDetailsComponent,resolve:{member:memberDetailedResolver}},
+
+
   {path:'member/edit',component:MemberEditComponent,canDeactivate:[PreventUnsavedChangesGuard]},
   {path:'lists',component:ListsComponent},
   {path:'messages',component:MessagesComponent},
@@ -38,6 +43,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+
 
 
 exports: [RouterModule]

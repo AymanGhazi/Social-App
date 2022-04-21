@@ -6,6 +6,7 @@ import { of, map, Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { Pagination } from './../_models/pagination';
 import { userParmas } from './../_models/userParmas';
+import { getpaginatedResult, getPaginationHeader } from './paginationHelper';
 
 
 
@@ -21,40 +22,15 @@ members:Member[]=[];
 
   getMembers(UserParmas:userParmas){
     
-  let params=this.GetPaginationHeader(UserParmas.PageNumber,UserParmas.pageSize);
+  let params=getPaginationHeader(UserParmas.PageNumber,UserParmas.pageSize);
   params=params.append("minAge",UserParmas.minAge.toString());
   params=params.append("maxAge",UserParmas.maxAge.toString());
   params=params.append("gender",UserParmas.gender);
   params=params.append("orderBy",UserParmas.orderBy);
 
    //observe of params
-  return this.getpaginatedResult<Member[]>(this.baseUrl+'users',params)
+  return getpaginatedResult<Member[]>(this.baseUrl+'users',params,this.http)
   
-  }
-
-  private getpaginatedResult<T>(Url:string,params: HttpParams) {
-        const paginatedResult:PaginatedResult<T>=new PaginatedResult<T>();
-    return this.http.get<T>(Url,
-      { observe: 'response', params }).pipe(
-        map(response => {
-          //update result <memberDTO>
-          paginatedResult.result = response.body;
-          if (response.headers.get('Pagination') !== null) {
-            //update pagination
-            paginatedResult.Pagination = JSON.parse(response.headers.get('Pagination'));
-          }
-          return paginatedResult;
-        })
-      );
-  }
-
-  public GetPaginationHeader(pageNumber:number,pageSize:number) {
-        let params=new HttpParams();
-      //double check that the params =params to save changes
-      params = params.append('PageNumber', pageNumber.toString());
-      params = params.append('PageSize', pageSize.toString());
-    
-    return params;
   }
 
   getMember(username:string){
@@ -88,10 +64,10 @@ addLike(username:string){
 }
 getlikes(predicate:string,pagenumber:number,pagesize:number){
 
-  let params=this.GetPaginationHeader(pagenumber,pagesize);
+  let params=getPaginationHeader(pagenumber,pagesize);
   params=params.append('predicate',predicate);
 
-  return this.getpaginatedResult<Partial<Member[]>>(this.baseUrl+'likes',params);
+  return getpaginatedResult<Partial<Member[]>>(this.baseUrl+'likes',params,this.http);
 
 }
 

@@ -18,6 +18,9 @@ namespace API.extensions
             //to update last Active filter
             services.AddScoped<LogUserActivity>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            
             services.AddScoped<ILIkeRepository, LikesRepository>();
             services.AddScoped<IuserRepository, UserRepository>();
 

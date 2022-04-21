@@ -1,7 +1,7 @@
 <div class="container emp-profile">
   <div class="row">
     <div class="col-md-3">
-      <div class="profile-img" *ngIf="member">
+      <div class="profile-img">
         <img
           [src]="member.photoUrl || './assets/user.png'"
           alt="{{ member.knownAs }}"
@@ -9,22 +9,26 @@
       </div>
       <div class="">
         <button type="submit" class="btn btn-outline-info ml-3">Like</button>
-        <button type="submit" class="btn btn-outline-success m-3">
+        <button
+          type="submit"
+          (click)="selectTab(4)"
+          class="btn btn-outline-success m-3"
+        >
           Message
         </button>
       </div>
     </div>
 
-    <div class="col-md-9" *ngIf="member" style="overflow: hidden">
+    <div class="col-md-9" style="overflow: hidden">
       <div class="profile-head">
         <h5>{{ member.userName }}</h5>
         <h6>Web Developer and Designer</h6>
         <p class="profile-rating age">
           AGE : <span>{{ member.age }}</span>
         </p>
-        <tabset class="member-tabset">
+        <tabset class="member-tabset" #membertabs>
           <!-- About -->
-          <tab heading="About">
+          <tab heading="About" (selectTab)="onTabActivated($event)">
             <!-- homesection -->
             <div
               id="home"
@@ -81,7 +85,7 @@
             </div>
           </tab>
           <!-- Description -->
-          <tab heading="Description">
+          <tab heading="Description" (selectTab)="onTabActivated($event)">
             <div>
               <div class="row">
                 <div>
@@ -91,7 +95,7 @@
             </div>
           </tab>
           <!-- lookingFor -->
-          <tab heading="Looking For">
+          <tab heading="Looking For" (selectTab)="onTabActivated($event)">
             <div id="profile" class="tab-pane">
               <div class="row">
                 <div>
@@ -108,8 +112,11 @@
               class="ngx-gallery"
             ></ngx-gallery>
           </tab>
-          <tab heading="Messages">
-            <p>Messages Will be here</p>
+          <tab heading="Messages" (selectTab)="onTabActivated($event)">
+            <app-member-messages
+              [messages]="messages"
+              [username]="member.userName"
+            ></app-member-messages>
           </tab>
         </tabset>
       </div>

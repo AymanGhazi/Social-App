@@ -26,9 +26,13 @@ namespace API.Entities
         public ICollection<Photo> Photos { get; set; }
         //who liked the current logged in user
         public ICollection<UserLike> ILikedByUsers { get; set; }
-        
+
         //who I(logged in user) like 
         public ICollection<UserLike> UsersILike { get; set; }
+
+        public ICollection<message> MessagesSent { get; set; }
+        public ICollection<message> MessagesReceived { get; set; }
+
 
 
 
