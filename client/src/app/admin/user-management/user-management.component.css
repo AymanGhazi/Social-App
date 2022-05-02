@@ -1,0 +1,20 @@
+
+* {
+  font-family: arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.tablecontainer{
+    width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  
+ 
+}
+thead {
+  font-weight: 700;
+  color: #fff;
+  background: #000;
+}
+thead *::selection { background: none; }

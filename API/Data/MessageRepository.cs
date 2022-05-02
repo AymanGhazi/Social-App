@@ -41,6 +41,7 @@ namespace API.Data
         public async Task<pageList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
         {
             var Query = _context.Messages.OrderByDescending(m => m.MessageSent).AsQueryable();
+
             Query = messageParams.container switch
             {
                 "inbox" => Query.Where(u => u.Recipient.UserName == messageParams.UserName && u.RecipientDeleted == false),
@@ -48,7 +49,9 @@ namespace API.Data
 
                 _ => Query.Where(u => u.Recipient.UserName == messageParams.UserName && u.DateRead == null && u.RecipientDeleted == false)
             };
+
             var message = Query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
+
             return await pageList<MessageDto>.CreateAsync(message, messageParams.PageNumber, messageParams.PageSize);
         }
 
@@ -63,8 +66,8 @@ namespace API.Data
              || t.Recipient.UserName == ReceipientName
              && t.Sender.UserName == CurrentUserName
              && t.senderDeleted == false
-
-             ).OrderBy(m => m.MessageSent)
+             )
+             .OrderBy(m => m.MessageSent)
              .ToListAsync();
 
             var UnreadMessages = Messages.Where(m => m.DateRead == null && m.Recipient.UserName == CurrentUserName);

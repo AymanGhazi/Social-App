@@ -16,7 +16,9 @@ export class RegisterComponent implements OnInit {
 
 registerForm:FormGroup;
 maxDate:Date;
+
 validationsErrors:string[]=[]
+
 get control () {
   return this.registerForm.controls as any
 }

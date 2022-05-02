@@ -14,9 +14,7 @@ namespace API.Entities
         public string content { get; set; }
         public DateTime? DateRead { get; set; }
         public DateTime MessageSent { get; set; } = DateTime.Now;
-
         public bool senderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
-
     }
 }

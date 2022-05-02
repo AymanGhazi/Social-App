@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Entities;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,9 +26,17 @@ namespace API
             var services = scope.ServiceProvider;
             try
             {
+                //Get the required Services
+
                 var context = services.GetRequiredService<DataContext>();
+
+                var UserManager = services.GetRequiredService<UserManager<AppUser>>();
+
+                var RoleManager = services.GetRequiredService<RoleManager<AppRole>>();
+                
                 await context.Database.MigrateAsync();
-                await seed.SeedUsers(context);
+
+                await seed.SeedUsers(UserManager, RoleManager);
             }
             catch (Exception ex)
             {

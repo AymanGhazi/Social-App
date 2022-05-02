@@ -64,7 +64,6 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDto>> GetUser(string username) //get list of users
         {
             return await _UserRepository.GetMemberAsync(username);
-
         }
 
         /// <summary>

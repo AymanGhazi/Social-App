@@ -19,6 +19,7 @@ messageContent:string
 
   ngOnInit(): void {
   }
+  
 sendMessage(){
   this.MessageService.sendMessage(this.username,this.messageContent).subscribe(message=>{
     this.messages.push(message);

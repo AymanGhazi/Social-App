@@ -20,6 +20,7 @@ CurrentUser$=this.CurrentUserSource.asObservable()
   constructor(private http:HttpClient) { }
 
   login(model:User){
+
       return this.http.post(this.baseUrl+'account/login',model).pipe(
         map((response:User)=>{
           const user=response;
@@ -44,6 +45,13 @@ CurrentUser$=this.CurrentUserSource.asObservable()
   }
 
 setcurrentuser(user:User){
+  user.roles=[];
+ const Roles= this.getDecodedToken(user.token).role
+ 
+ //if not array of roles , one role
+
+ Array.isArray(Roles)? user.roles= Roles :user.roles.push(Roles);
+
           //add to the local storage
      localStorage.setItem('user',JSON.stringify(user))
           //add to observable to get it in the component
@@ -52,5 +60,9 @@ setcurrentuser(user:User){
   logout(){
     localStorage.removeItem('user')
     this.CurrentUserSource.next(null);
+  }
+
+  getDecodedToken(token:string){
+    return JSON.parse(atob(token.split('.')[1]))
   }
 }

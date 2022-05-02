@@ -25,7 +25,7 @@ namespace API.Controllers
             _UserRepository = UserRepository;
         }
         [HttpPost]
-        public async Task<ActionResult> CreateMessage(CreateMessageDto createMessageDto)
+        public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
         {
             var username = User.GetuserName();
             if (username == createMessageDto.RecipientUserName.ToLower())
@@ -33,6 +33,7 @@ namespace API.Controllers
                 return BadRequest("You can not send message to yourself");
             }
             var Sender = await _UserRepository.GetUserbyUserNameAsync(username);
+
             var receipient = await _UserRepository.GetUserbyUserNameAsync(createMessageDto.RecipientUserName);
 
             if (receipient == null)
@@ -57,7 +58,7 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageForUser([FromQuery] MessageParams messageParams)
-        {
+        { 
             messageParams.UserName = User.GetuserName();
             var Messages = await _messageRepository.GetMessagesForUser(messageParams);
 
@@ -72,6 +73,7 @@ namespace API.Controllers
             var CurrentUserName = User.GetuserName();
             return Ok(await _messageRepository.getMessageThread(CurrentUserName, username));
         }
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMessage(int id)
         {
@@ -82,6 +84,7 @@ namespace API.Controllers
             {
                 return Unauthorized();
             }
+            
             if (message.Sender.UserName == username)
             {
                 message.senderDeleted = true;

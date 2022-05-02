@@ -7,7 +7,9 @@ import { Message } from './../_models/message';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MessageService {
+
   baseUrl=environment.apiUrl;
   constructor(private http:HttpClient) { }
   
@@ -24,7 +26,10 @@ getMessages(pageNumber,PageSize,container){
  sendMessage(username:string,content:string){
 return this.http.post<Message>(this.baseUrl+'messages',{RecipientUserName:username,content})
  }
+
  Deletmessage(id:number){
    return this.http.delete(this.baseUrl+"messages/"+ id)
  }
+
+ 
 }

@@ -11,9 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private accountService:AccountService,
     private toastr:ToastrService
-    ){
-
-  }
+    ){}
 
   canActivate(): Observable<boolean > {
     

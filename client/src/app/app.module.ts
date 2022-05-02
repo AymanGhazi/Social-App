@@ -14,7 +14,6 @@ import { MemberListsComponent } from './members/member-lists/member-lists.compon
 
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
@@ -32,6 +31,13 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import {MatTableModule} from '@angular/material/table';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component';
 
 
 @NgModule({
@@ -53,6 +59,11 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
   TextInputComponent,
   DateInputComponent,
   MemberMessagesComponent,
+  AdminComponent,
+  HasRoleDirective,
+  UserManagementComponent,
+  PhotoManagementComponent,
+  RolesModalComponent
 
 
   ],
@@ -65,7 +76,9 @@ BrowserModule,
     SharedModule,
     MatTabsModule,
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    ModalModule.forRoot()
     
     
   ],

@@ -46,6 +46,16 @@
               Messages</a
             >
           </li>
+          <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
+            <a
+              class="nav-link"
+              routerLink="/admin"
+              routerLinkActive="active"
+              data-bs-toggle="tab"
+            >
+              admin</a
+            >
+          </li>
         </ng-container>
       </ul>
     </div>
@@ -68,7 +78,8 @@
           src="{{ User.photoUrl || './assets/user.png' }}"
           alt="{{ User.userName }}"
         />
-        Welcome {{ User.knownas | titlecase }} <span class="caret"></span>
+        Welcome {{ User.knownas || User.userName | titlecase }}
+        <span class="caret"></span>
       </a>
       <ul
         id="dropdown-animated"
