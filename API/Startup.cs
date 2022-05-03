@@ -10,6 +10,7 @@ using API.Helpers;
 using API.interfaces;
 using API.MiddelWare;
 using API.services;
+using API.SignalR;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +42,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             //extension method
             services.ApplicationServices(_config);
             services.AddControllers();
@@ -62,12 +64,21 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://localhost:4200"));
+            app.UseCors(policy => policy
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .WithOrigins("https://localhost:4200"));
+
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<presenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
+
             });
         }
     }

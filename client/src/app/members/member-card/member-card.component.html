@@ -3,10 +3,14 @@
     <div class="picture">
       <img
         class="img-fluid"
+        [class.online]="
+          (presence.OnlineUSers$ | async).includes(member.userName)
+        "
         src="{{ member.photoUrl || './assets/user.png' }}"
       />
     </div>
     <div class="team-content">
+      
       <h3 class="name">{{ member.userName }}</h3>
       <h4 class="title">Age : {{ member.age }}</h4>
     </div>

@@ -4,6 +4,7 @@ using API.DTos;
 using API.Helpers;
 using API.interfaces;
 using API.services;
+using API.SignalR;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,12 +16,14 @@ namespace API.extensions
     {
         public static IServiceCollection ApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            //SignalR tracker of users and connectionIDs
+            services.AddSingleton<presenceTracker>();
             //to update last Active filter
             services.AddScoped<LogUserActivity>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
             services.AddScoped<IMessageRepository, MessageRepository>();
-            
+
             services.AddScoped<ILIkeRepository, LikesRepository>();
             services.AddScoped<IuserRepository, UserRepository>();
 

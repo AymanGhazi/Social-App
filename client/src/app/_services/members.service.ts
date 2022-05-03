@@ -2,23 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import{Member}from "../_models/Member"
-import { of, map, Observable } from 'rxjs';
+import { of, map, Observable, BehaviorSubject } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { Pagination } from './../_models/pagination';
 import { userParmas } from './../_models/userParmas';
 import { getpaginatedResult, getPaginationHeader } from './paginationHelper';
-
-
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { User } from 'src/app/_models/user';
+import { Message } from './../_models/message';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class MembersService {
-   headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-  baseUrl=environment.apiUrl;
+headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+baseUrl=environment.apiUrl;
 members:Member[]=[];
+
+
     constructor(private http:HttpClient) {}
+
+
 
   getMembers(UserParmas:userParmas){
     

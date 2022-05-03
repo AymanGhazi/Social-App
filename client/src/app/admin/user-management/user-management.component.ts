@@ -14,7 +14,8 @@ export class UserManagementComponent implements OnInit {
 users:Partial<User[]>;
 modalRef:BsModalRef
 
-  constructor(private admin:AdminService,private modalService:BsModalService) { }
+  constructor(private admin:AdminService,
+    private modalService:BsModalService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles()
@@ -33,44 +34,47 @@ modalRef:BsModalRef
         roles:this.GetRolesArray(user)
       }
       }
-
-    this.modalRef = this.modalService.show(RolesModalComponent, config);
-    this.modalRef.content?.updateSelectedRoles.subscribe(values=>{
-      const rolesToUpdate={
-        roles:[...values.filter(el=>el.checked===true).map(el=>el.name)]
-      };
-      if(rolesToUpdate){
-        this.admin.updateUserRoles(user.userName,rolesToUpdate.roles).subscribe(()=>{
-          user.roles=[...rolesToUpdate.roles]
-        })
-      }
+      //emit the event
+      //ref = service.show
+      //ref.content.subscribe
+   
+this.modalRef=this.modalService.show(RolesModalComponent,config);
+this.modalRef.content?.updateSelectedRoles.subscribe((values)=>{
+  const rolestosend={
+    roles:[...values.filter(el=>el.checked==true).map(el=>el.name)]
+  };
+  if (rolestosend) {
+    this.admin.updateUserRoles(user.userName,rolestosend.roles).subscribe(()=>{
+      user.roles=[...rolestosend.roles]
     })
+  }
+})
+
     };
     private GetRolesArray(user:User){
-      const roles=[]
-      const userroles=user.roles
+      const RoleToGet=[]
+      const UserRoles=user.roles;
       const availableRoles:any[]=[
         {name:"Admin",value:"Admin"},
         {name:"Moderator",value:"Moderator"},
         {name:"Member",value:"Member"},
-      ];
+      ]
       availableRoles.forEach(r=>{
-        let IsMatch=false;
-        for(const UserRole of userroles){
-            if (r.name==UserRole) {
-              IsMatch=true;
-              r.checked=true;
-              roles.push(r)
-              break;
-            }
+       let IsMatch=false;
+        for (const userRole of UserRoles) {
+        if (r.name==userRole) {
+        IsMatch=true;
+        r.checked=true
+        RoleToGet.push(r)
+        break;}
         }
+        //outer loop
         if (!IsMatch) {
-        r.checked=false;
-        roles.push(r);
+          r.checked=false;
+          RoleToGet.push(r);
         }
       })
-      console.log(roles)
-      return roles
+      return RoleToGet;
     }
    
   }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, ReplaySubject } from 'rxjs';
 import { User } from '../_models/user';
 import { environment } from './../../environments/environment';
+import { PresenceService } from './presence.service';
 
 
 
@@ -17,7 +18,7 @@ baseUrl=environment.apiUrl;
 private CurrentUserSource=new ReplaySubject<User>(1);
 CurrentUser$=this.CurrentUserSource.asObservable()
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private presence :PresenceService) { }
 
   login(model:User){
 
@@ -26,7 +27,7 @@ CurrentUser$=this.CurrentUserSource.asObservable()
           const user=response;
           if(user){
             this.setcurrentuser(user)
-          
+            this.presence.createHubConnection(user);
           }
         })
       )
@@ -38,7 +39,7 @@ CurrentUser$=this.CurrentUserSource.asObservable()
       map((user:User)=>{
         if(user){
             this.setcurrentuser(user)
-           
+            this.presence.createHubConnection(user);
         }
       })
     )
@@ -60,6 +61,8 @@ setcurrentuser(user:User){
   logout(){
     localStorage.removeItem('user')
     this.CurrentUserSource.next(null);
+    this.presence.stophabConnection();
+
   }
 
   getDecodedToken(token:string){

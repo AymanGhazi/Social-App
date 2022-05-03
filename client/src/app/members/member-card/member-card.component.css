@@ -99,3 +99,7 @@
     color: #1369ce;
     background-color: #f7f5ec;
 }
+
+.online {
+    box-shadow: 0 0 0 14px #28A745;
+}

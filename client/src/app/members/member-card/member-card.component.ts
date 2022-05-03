@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Member } from 'src/app/_models/Member';
 import { MembersService } from 'src/app/_services/members.service';
 import { ToastrService } from 'ngx-toastr';
+import { PresenceService } from './../../_services/presence.service';
 
 @Component({
   selector: 'app-member-card',
@@ -12,11 +13,10 @@ export class MemberCardComponent implements OnInit {
 @Input() member:Member
 @Input()like:boolean=false
 
-  constructor(private MembersService: MembersService,private Toastr :ToastrService) { }
+  constructor(private MembersService: MembersService,private Toastr :ToastrService ,public presence:PresenceService ) { }
 
   ngOnInit(): void {
-  
-    
+
   }
 
   addLike(member:Member){
