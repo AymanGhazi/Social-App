@@ -1,5 +1,6 @@
 using System;
 using API.Entities;
+using Newtonsoft.Json;
 
 namespace API.DTos
 {
@@ -15,5 +16,9 @@ namespace API.DTos
         public string content { get; set; }
         public DateTime? DateRead { get; set; }
         public DateTime MessageSent { get; set; }
+        [JsonIgnore]
+        public bool SenderDeleted { get; set; }
+        [JsonIgnore]
+        public bool RecipientDeleted { get; set; }
     }
 }

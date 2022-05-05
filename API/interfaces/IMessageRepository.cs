@@ -23,7 +23,6 @@ namespace API.interfaces
 
         Task<IEnumerable<MessageDto>> getMessageThread(string CurrentUserName, string ReceipientName);
 
-        Task<bool> SaveAllAsync();
 
     }
 }

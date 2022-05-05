@@ -21,10 +21,10 @@ namespace API.Helpers
             }
             //from calims principles
             var userId = resultContext.HttpContext.User.GetuserID();
-            var repo = resultContext.HttpContext.RequestServices.GetService<IuserRepository>();
-            var user = await repo.GetUserbyIdAsync(userId);
-            user.LastActive = DateTime.Now;
-            await repo.SaveAllAsync();
+            var UoW = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            var user = await UoW.UserRepository.GetUserbyIdAsync(userId);
+            user.LastActive = DateTime.UtcNow;
+            await UoW.Complete();
             //go to Base Api Controler
         }
     }

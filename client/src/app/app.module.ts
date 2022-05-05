@@ -38,6 +38,8 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import {MatTableModule} from '@angular/material/table';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component';
+import { ConfirmDialogComponent } from './Modals/confirm-dialog/confirm-dialog.component';
+
 
 
 @NgModule({
@@ -63,7 +65,8 @@ import { RolesModalComponent } from './Modals/roles-modal/roles-modal.component'
   HasRoleDirective,
   UserManagementComponent,
   PhotoManagementComponent,
-  RolesModalComponent
+  RolesModalComponent,
+  ConfirmDialogComponent,
 
 
   ],
