@@ -21,6 +21,8 @@ namespace API.Data
 
         public ILIkeRepository LikeRepository => new LikesRepository(_context);
 
+        public IPhotoRespository PhotoRespository => new PhotoRepository(_context);
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

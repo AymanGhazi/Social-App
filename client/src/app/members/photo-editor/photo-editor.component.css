@@ -2,3 +2,13 @@
     border: dotted 3px red;
 
 }
+.not-approved {
+opacity: 0.2;
+}
+.img-wrapper {
+position: relative
+}
+.img-text {
+position: relative;
+bottom: 10%;
+}

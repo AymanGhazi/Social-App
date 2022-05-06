@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,6 +27,7 @@ namespace API.Data
             var users = JsonSerializer.Deserialize<List<AppUser>>(UserData);
             if (users == null) return;
 
+
             var Roles = new List<AppRole>{
                 new AppRole{Name="Member"},
                 new AppRole{Name="Admin"},
@@ -38,9 +40,13 @@ namespace API.Data
 
             foreach (var user in users)
             {
+                //like foreach
+                user.Photos.First().IsApproved = true;
+
                 user.UserName = user.UserName.ToLower();
                 await UserManager.CreateAsync(user, "Pa$$w0rd");
                 await UserManager.AddToRoleAsync(user, "Member");
+
             }
             var admin = new AppUser
             {

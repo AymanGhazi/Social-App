@@ -77,12 +77,17 @@ namespace API.Data
             return await pageList<MemberDto>.CreateAsync(Query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(string username, bool IsCurrentUser)
         {
 
-            return await _context.Users.Where(x => x.UserName == username)
-            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            .SingleOrDefaultAsync();
+
+            var Query = _context.Users.Where(x => x.UserName == username)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider);
+            if (IsCurrentUser)
+            {
+                Query = Query.IgnoreQueryFilters();
+            }
+            return await Query.FirstOrDefaultAsync();
         }
 
         public async Task<string> GetUserGender(string username)
@@ -90,6 +95,15 @@ namespace API.Data
             return await _context.Users.Where(x => x.UserName == username)
               .Select(x => x.Gender)
               .FirstOrDefaultAsync();
+        }
+
+        public async Task<AppUser> GetUserByPhotoId(int PhotoId)
+        {
+            return await _context.Users
+            .Include(p => p.Photos)
+            .IgnoreQueryFilters()
+            .Where(p => p.Photos.Any(p => p.id == PhotoId))
+            .FirstOrDefaultAsync();
         }
     }
 }

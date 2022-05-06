@@ -17,6 +17,7 @@ export class MemberEditComponent implements OnInit {
 member:Member;
 user:User;
 edit:boolean=false
+
 @HostListener('window:beforeunload',['$event'])unloadNotification($event:any){
   if (this.editform.dirty) {
     $event.returnValue=true
@@ -25,10 +26,10 @@ edit:boolean=false
 
   constructor(
     private accountservice:AccountService
-    ,private memberservice:MembersService,
+    ,public memberservice:MembersService,
     public toastr:ToastrService
               ) {
-                this.accountservice.CurrentUser$.pipe(take(1)).subscribe(
+             this.accountservice.CurrentUser$.pipe(take(1)).subscribe(
                   user=>{
                     this.user=user
                   }
@@ -36,8 +37,7 @@ edit:boolean=false
                }
 
   ngOnInit(): void {
-
-    this.loadmember()     
+     this.loadmember() 
   }
       loadmember(){
         this.memberservice.getMember(this.user.userName).subscribe(

@@ -26,12 +26,15 @@ user:User
     ) { 
     this.accountService.CurrentUser$.pipe(take(1)).subscribe(user=>
       this.user=user)
+     
 
   }
 
 
   ngOnInit(): void {
     this.initializeUploader()
+
+     console.log(this.member.photos)
   }
 //event attached to hasBaseDropZoneOver
   fileOverBase(e:any){

@@ -64,7 +64,7 @@
                       type="text"
                       name="gender"
                       *ngIf="edit"
-                      value="{{ member.gender }}"
+                      value="{{ member?.gender }}"
                     />
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                       *ngIf="edit"
                       name="introduction"
                       cols="80"
-                      placeholder="{{ member.introduction }}"
+                      placeholder="{{ member?.introduction }}"
                       rows="6"
                     ></textarea>
                   </div>
