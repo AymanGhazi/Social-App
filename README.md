@@ -1,10 +1,12 @@
 # Social-App
 Social App for Live messaging and profiling and Following Etc...
+# Functions
+
 Login
 
 Logout
 
-#Register
+Register
 
 upload Photos
 
